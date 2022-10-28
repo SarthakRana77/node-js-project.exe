@@ -22,12 +22,14 @@ const store = new MongoDBStore({
 });
 const csrfProtection = csrf();
 
+
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'images');
   },
   filename: (req, file, cb) => {
-    cb(null, new Date().toISOString() + '-' + file.originalname);
+    let r = (Math.random() + 1).toString(36).substring(7);
+    cb(null,r+'-'+file.originalname);
   }
 });
 
