@@ -14,6 +14,8 @@ const compression=require('compression');
 const morgan=require('morgan');
 const errorController = require('./controllers/error');
 const User = require('./models/user');
+const dotenv = require('dotenv');
+dotenv.config();
 const MONGODB_URI =
   `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@sarthak.wglmfsr.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
 
@@ -29,7 +31,7 @@ const csrfProtection = csrf();
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'images');
-  },
+  }, 
   filename: (req, file, cb) => {
     let r = (Math.random() + 1).toString(36).substring(7);
     cb(null,r+'-'+file.originalname);
